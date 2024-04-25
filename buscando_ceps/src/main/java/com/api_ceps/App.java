@@ -20,6 +20,9 @@ public class App {
         Scanner scanner = new Scanner(System.in);
 
 
+        MySQLConnection conexao= new MySQLConnection();
+
+        System.out.println(conexao);
 
     	System.out.print("Qual é o cep que deseja pesquisar? ");
     	String cep = scanner.nextLine();
