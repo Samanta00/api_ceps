@@ -1,17 +1,49 @@
 package com.api_ceps;
 
-/**
- * Hello world!
- */
-public final class App {
-    private App() {
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.ProxySelector;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpClient.Redirect;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpResponse.BodyHandlers;
+import java.time.Duration;
+import java.util.Scanner;
+
+
+public class App {
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        Scanner scanner = new Scanner(System.in);
+
+
+
+    	System.out.print("Qual é o cep que deseja pesquisar? ");
+    	String cep = scanner.nextLine();
+
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create("https://brasilapi.com.br/api/cep/v1/"+cep))
+                .headers("Accept", "application/json")
+
+                .timeout(Duration.ofSeconds(3))
+                .build();
+
+        HttpClient httpClient = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(3))
+                .followRedirects(Redirect.NORMAL)
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
+
+        System.out.println("O cep que você fez a busca foi:" + cep + "e ele trouxe esses resultados:");
+        System.out.println(response.body());
+
+
     }
 
-    /**
-     * Says hello to the world.
-     * @param args The arguments of the program.
-     */
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
 }
