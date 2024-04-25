@@ -11,10 +11,6 @@ public class MySQLConnection {
 
             if (connection != null) {
                 System.out.println("Connected to the database!");
-
-                // Aqui você pode usar a conexão para realizar operações de consulta, atualização, exclusão, etc.
-
-                // Não se esqueça de fechar a conexão quando terminar de usá-la
                 connection.close();
             } else {
                 System.out.println("Failed to make connection!");
@@ -33,9 +29,9 @@ public class MySQLConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Set up the connection properties
-            String url = "jdbc:mysql://localhost:3306/your_database_name";
-            String username = "your_username";
-            String password = "your_password";
+            String url = "jdbc:mysql://sql8.freemysqlhosting.net/sql8702038";
+            String username = "sql8702038";
+            String password = "4kELkyTPnX";
 
             // Create the connection
             connection = DriverManager.getConnection(url, username, password);
