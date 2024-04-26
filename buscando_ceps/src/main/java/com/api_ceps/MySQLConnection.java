@@ -10,7 +10,7 @@ import org.json.JSONObject;
 public class MySQLConnection {
     public static void main(String[] args) {
         try {
-            criarTabelaSeNaoExistir();
+
             Connection connection = getConnection();
 
             if (connection != null) {
@@ -28,6 +28,7 @@ public class MySQLConnection {
 
     public void salvarResultado(Object valores) {
         try {
+            criarTabelaSeNaoExistir();
 
             Connection connection = getConnection();
 
