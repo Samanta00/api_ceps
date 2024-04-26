@@ -10,6 +10,7 @@ import org.json.JSONObject;
 public class MySQLConnection {
     public static void main(String[] args) {
         try {
+            criarTabelaSeNaoExistir();
             Connection connection = getConnection();
 
             if (connection != null) {
@@ -25,11 +26,13 @@ public class MySQLConnection {
         }
     }
 
-        public void salvarResultado(Object valores) {
+    public void salvarResultado(Object valores) {
         try {
 
-            JSONObject jsonObject = new JSONObject(valores.toString());
+            Connection connection = getConnection();
 
+
+            JSONObject jsonObject = new JSONObject(valores.toString());
             String cep = jsonObject.getString("cep");
             String state = jsonObject.getString("state");
             String city = jsonObject.getString("city");
@@ -37,9 +40,9 @@ public class MySQLConnection {
             String street = jsonObject.getString("street");
             String service = jsonObject.getString("service");
 
-            Connection connection = getConnection();
-            String sql = "INSERT INTO resultados_cep (cep, state, city, neighborhood, street, service) VALUES (?, ?, ?, ?, ?, ?)";
 
+
+            String sql = "INSERT INTO resultados_cep (cep, state, city, neighborhood, street, service) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, cep);
             statement.setString(2, state);
@@ -47,9 +50,18 @@ public class MySQLConnection {
             statement.setString(4, neighborhood);
             statement.setString(5, street);
             statement.setString(6, service);
-            System.out.println("valores recebidos" + statement);
 
+            statement.executeUpdate();
 
+            System.out.println("As informações referentes a esse CEP são essas:");
+            System.out.println("CEP: " + cep);
+            System.out.println("UF: " + state);
+            System.out.println("Cidade: " + city);
+            System.out.println("Vizinhança: " + neighborhood);
+            System.out.println("Rua: " + street);
+
+            statement.close();
+            connection.close();
 
         } catch (SQLException e) {
             System.out.println("Erro ao salvar resultado no banco de dados");
@@ -60,20 +72,45 @@ public class MySQLConnection {
     public static Connection getConnection() throws SQLException {
         Connection connection = null;
         try {
-            // Load the MySQL JDBC driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Set up the connection properties
             String url = "jdbc:mysql://sql8.freemysqlhosting.net/sql8702038";
             String username = "sql8702038";
             String password = "4kELkyTPnX";
 
-            // Create the connection
             connection = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException e) {
             System.out.println("MySQL JDBC Driver not found!");
             e.printStackTrace();
         }
         return connection;
+    }
+
+    public static void criarTabelaSeNaoExistir() {
+        try {
+            Connection connection = getConnection();
+
+            // SQL para criar a tabela se não existir
+            String sql = "CREATE TABLE IF NOT EXISTS resultados_cep ("
+                       + "id INT AUTO_INCREMENT PRIMARY KEY,"
+                       + "cep VARCHAR(255),"
+                       + "state VARCHAR(255),"
+                       + "city VARCHAR(255),"
+                       + "neighborhood VARCHAR(255),"
+                       + "street VARCHAR(255),"
+                       + "service VARCHAR(255)"
+                       + ")";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+
+            statement.executeUpdate();
+
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao criar tabela resultados_cep");
+            e.printStackTrace();
+        }
     }
 }
