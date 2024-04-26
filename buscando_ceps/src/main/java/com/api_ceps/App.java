@@ -47,13 +47,12 @@ public class App {
         HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
 
         if(response.statusCode()==200){
-
             conexao.salvarResultado(response.body());
-
+        }
+        else{
+            System.out.println("Houve uma falha ao fazer a busca por esse cep, tente novamente com outro");
         }
 
-
-        System.out.println(response.body());
 
 
     }
