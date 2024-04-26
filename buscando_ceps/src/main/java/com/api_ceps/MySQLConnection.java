@@ -2,7 +2,10 @@ package com.api_ceps;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import org.json.JSONObject;
 
 public class MySQLConnection {
     public static void main(String[] args) {
@@ -18,6 +21,38 @@ public class MySQLConnection {
 
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
+            e.printStackTrace();
+        }
+    }
+
+        public void salvarResultado(Object valores) {
+        try {
+
+            JSONObject jsonObject = new JSONObject(valores.toString());
+
+            String cep = jsonObject.getString("cep");
+            String state = jsonObject.getString("state");
+            String city = jsonObject.getString("city");
+            String neighborhood = jsonObject.getString("neighborhood");
+            String street = jsonObject.getString("street");
+            String service = jsonObject.getString("service");
+
+            Connection connection = getConnection();
+            String sql = "INSERT INTO resultados_cep (cep, state, city, neighborhood, street, service) VALUES (?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, cep);
+            statement.setString(2, state);
+            statement.setString(3, city);
+            statement.setString(4, neighborhood);
+            statement.setString(5, street);
+            statement.setString(6, service);
+            System.out.println("valores recebidos" + statement);
+
+
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao salvar resultado no banco de dados");
             e.printStackTrace();
         }
     }
