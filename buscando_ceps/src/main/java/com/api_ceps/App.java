@@ -14,6 +14,9 @@ import java.time.Duration;
 import java.util.Scanner;
 
 
+
+
+
 public class App {
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -43,7 +46,13 @@ public class App {
 
         HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
 
-        System.out.println("O cep que você fez a busca foi:" + cep + "e ele trouxe esses resultados:");
+        if(response.statusCode()==200){
+
+            conexao.salvarResultado(response.body());
+
+        }
+
+
         System.out.println(response.body());
 
 
