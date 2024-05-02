@@ -15,13 +15,55 @@
 ### https://www.youtube.com/watch?v=RJCddOFCnVc
 ### https://www.youtube.com/watch?v=FmQeg7oj6Io&t=106s
 
-## Para uma experiência melhor, esse o banco de dados desse projeto está na núvem, para você conseguir acessar esse recurso e analisar melhor como está sendo inserido os resultados, estou compartilhando as informações de acesso
-## link: http://www.phpmyadmin.co 
+
+## Quando essa aplicação foi feitaa conexão com o banco de dados estava na núvem pelas seguintes informações: 
+## link da web: http://www.phpmyadmin.co 
 ## Server: sql8.freemysqlhosting.net
 ### Name: sql8702038
 ### Username: sql8702038
 ### Password: 4kELkyTPnX
 ### Port number: 3306
+
+## oque aconteceu é que existe um prazo para manter essa conexão online, talvez quando você utilizar esse projeto a conexão já esteja expirada mas nada que atrapalhe a execução do projeto, pois vou explicar como você pode adicionar a sua própria conexão.
+
+### Primeiramente acesse o arquivo: buscando_ceps/src/main/java/com/api_ceps/MySQLConnection.java
+### você vai encontrar esse trecho do código 
+    public static Connection getConnection() throws SQLException {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            String url = "jdbc:mysql://sql8.freemysqlhosting.net/sql8702038";
+            String username = "sql8702038";
+            String password = "4kELkyTPnX";
+
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC Driver not found!");
+            e.printStackTrace();
+        }
+        return connection;
+    }
+
+### você vai modificar ele com suas informações, sejam elas locais ou não, exemplo:
+public static Connection getConnection() throws SQLException {
+    Connection connection = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+
+        // Substitua essas informações com as do seu servidor local
+        String url = "jdbc:mysql://localhost:3306/nome_do_banco_de_dados";
+        String username = "seu_usuario";
+        String password = "sua_senha";
+
+        connection = DriverManager.getConnection(url, username, password);
+    } catch (ClassNotFoundException e) {
+        System.out.println("MySQL JDBC Driver not found!");
+        e.printStackTrace();
+    }
+    return connection;
+}
+
 
 
 ### Inicialmente o projeto começou com uma versão diferente ao do java 11, então foi seguido esse recurso do forum para mudar a versão: https://cursos.alura.com.br/forum/topico-mudando-a-versao-do-java-1-5-ou-outras-versoes-para-o-11-124472
