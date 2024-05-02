@@ -16,7 +16,7 @@
 ### https://www.youtube.com/watch?v=FmQeg7oj6Io&t=106s
 
 
-## Quando essa aplicação foi feitaa conexão com o banco de dados estava na núvem pelas seguintes informações: 
+## Quando essa aplicação foi feita a conexão com o banco de dados estava na núvem pelas seguintes informações: 
 ## link da web: http://www.phpmyadmin.co 
 ## Server: sql8.freemysqlhosting.net
 ### Name: sql8702038
