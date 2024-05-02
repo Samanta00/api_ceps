@@ -1,24 +1,24 @@
 ## Automação para pesquisar na Brasil API
 
-# Objetivos
-## Projeto Guiado Para a Execução de uma Automatização que retorna os Resultados de busca por cep.
+## Objetivos
+### Projeto Guiado Para a Execução de uma Automatização que retorna os Resultados de busca por cep.
 
-# Recursos Utilizados:
-## ● Versão do Java 11
-## ● Utilizar o HttpClient nativo do Java
-## ● MySQL 8
-## Boas Práticas de Commits para você entender como o código foi desenvolvido
+## Recursos Utilizados:
+### ● Versão do Java 11
+### ● Utilizar o HttpClient nativo do Java
+### ● MySQL 8
+### Boas Práticas de Commits para você entender como o código foi desenvolvido
 
-## Antes de Iniciar o Projeto é importante que você tenha o ambiente java configurado em sua máquina
+### Antes de Iniciar o Projeto é importante que você tenha o ambiente java configurado em sua máquina
 ## Recomendação:
-### link de um vídeo que foi utilizado como orientação para configurar o ambiente de desenvolvimento desse projeto: https://www.youtube.com/watch?v=I4WMPt6mBYs&list=PLWXw8Gu52TRI0usqoSTLrioF6NPp-3msb&index=2
+### link de conteúdos que foram utilizado como orientação para configurar o ambiente de desenvolvimento desse projeto: https://www.youtube.com/watch?v=I4WMPt6mBYs&list=PLWXw8Gu52TRI0usqoSTLrioF6NPp-3msb&index=2
 ### https://www.youtube.com/watch?v=RJCddOFCnVc
 ### https://www.youtube.com/watch?v=FmQeg7oj6Io&t=106s
 
-
-## Quando essa aplicação foi feita a conexão com o banco de dados estava na núvem pelas seguintes informações: 
-## link da web: http://www.phpmyadmin.co 
-## Server: sql8.freemysqlhosting.net
+# ATENÇÃO!!!
+### Quando essa aplicação foi feita a conexão com o banco de dados estava na núvem pelas seguintes informações: 
+### link da web: http://www.phpmyadmin.co 
+### Server: sql8.freemysqlhosting.net
 ### Name: sql8702038
 ### Username: sql8702038
 ### Password: 4kELkyTPnX
@@ -46,23 +46,26 @@
     }
 
 ### você vai modificar ele com suas informações, sejam elas locais ou não, exemplo:
-public static Connection getConnection() throws SQLException {
-    Connection connection = null;
-    try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
 
-        // Substitua essas informações com as do seu servidor local
-        String url = "jdbc:mysql://localhost:3306/nome_do_banco_de_dados";
-        String username = "seu_usuario";
-        String password = "sua_senha";
+    public static Connection getConnection() throws SQLException {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-        connection = DriverManager.getConnection(url, username, password);
-    } catch (ClassNotFoundException e) {
-        System.out.println("MySQL JDBC Driver not found!");
-        e.printStackTrace();
+            // Substitua essas informações com as do seu servidor local
+            String url = "jdbc:mysql://localhost:3306/nome_do_banco_de_dados";
+            String username = "seu_usuario";
+            String password = "sua_senha";
+
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC Driver not found!");
+            e.printStackTrace();
+        }
+        return connection;
     }
-    return connection;
-}
+
+
 
 
 
