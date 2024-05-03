@@ -85,7 +85,7 @@
 ## No seu terminal será exibido essa pergunta:
 ![image](https://github.com/Samanta00/api_ceps/assets/80990432/70413900-a0de-476b-8871-0c61b457b173)
 
-## com.api_ceps.MySQLConnection@4aa298b7, está sendo exibido pois ele está informando que a conexão com o banco de dados foi bem sucesidada
+## com.api_ceps.MySQLConnection@4aa298b7, está sendo exibido pois ele está informando que a conexão com o banco de dados foi bem sucedida
 ## agora insira no seu terminal o cep em que deseja fazer uma busca
 ## se tudo ocorrer bem a resposta exibida será essa: ![image](https://github.com/Samanta00/api_ceps/assets/80990432/2e6f128d-a9ce-4877-a51f-eee125926aea)
 
